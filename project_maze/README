@@ -1,0 +1,75 @@
+Name: Hao Xuan, Jicheng Zhao
+CCID: hxuan, jicheng
+Student ID# 1537913, 1503763
+CMPUT 275 Project: Maze Runner 
+
+Included Files: 
+-client
+    *Makefile  
+    *Project.cpp
+
+-server
+    *maze.cpp
+    *serialport.cpp
+    *serialport.h
+    *Makefile
+*README
+
+
+Accessories:
+*USB Cable
+*Arduino Mega Board (AMG)
+*Adafruit_ILI9341 Breakout(the touchscreen display + SD)
+
+
+Instructions:
+1. Connect the Arduino to the PC using an A-B style USB cable. Ensure
+that the Arduino is using the proper serial port (/dev/ttyACM0 or -ACM1).
+2. In the directory containing a Makefile, use the command "make upload" to upload the code to the Arduino.
+3. Starting program with server./ maze 
+4. One the starting screen appears. click the "Play now" to start the game.PLEASE WAIT FOR A FEW SECONDS FOR THE MAP TO DRAW!
+5. win or lose the game, it will bring you to another screen, if you click "Exit" the whole game will quit and show up a black scrren, if you click "play agian" a different/random map will appear for you to play again. 
+
+
+
+
+Wiring instruction:
+
+Board Pin <---> Arduino Pin
+===========================
+GND             GND
+Vin             5V
+3Vo             NOT CONNECTED
+CLK             52
+MISO            50
+MOSI            51
+CS              10
+D/C             9
+RST             NOT CONNECTED
+Lite            NOT CONNECTED
+Y+              A2 (analog pin)
+X+              4  (digital pin)
+Y-              5  (digital pin)
+X-              A3 (analog pin)
+IM0 - IM3       NOT CONNECTED (they expect a 3.3v signal, DON'T CONNECT!)
+CCS             6
+CD              NOT CONNECTED
+============================
+
+REFERENT TO Wiring on eclass.
+
+
+Description:
+In the project, we successfully build a game that called the Maze Runner, whcih is a solving maze game that can generate random map for each play with fixed start and end points. 
+
+under "Instructions:" will show you how to start and run this game. 
+
+The program we designed is divided into 2 part, client and server. The game starts with a start screen, once the user touches the "play now" the game will start, the map will start drawing. PLEASE WAIT FOR A FEW SECONDS FOR THE MAP TO DRAW! As our algorithm will produce and comminicate the maze array row by row. You can see how it works on the terminal, due to our serial print under "maze.cpp"
+
+The algorithm and most of the communication will be taking care of in the server part under "maze.cpp" and "serialport.cpp" respectively. In the client part, we have the design of the game, as well as the screen and user interfacing. (such as moving the cursor and touch the screen). "Project.cpp" can be divided into 4 section, 1.maze set up section, which includes functions, "setup(), get_data(), gameMapSetup(), and timer()", whcih will take care of the basic map layuout, as well as the communication with server and set up the timer. 2. game mode section,which includes "drawCursor(), checkBlocks() and gameMode()". which will take care of the how the game worls, how should the cursor move, and if win or lose. 3.screen and Touch section, which includes all 3 screens that will possibly occur, and also the touchscreen functions. 4.combined main section, which includes all the sections and function above, and works in one main function. 
+
+overall, the game is working successful with no errors, in the process of making the game, we worked very hard through this month to produce this result and we both learned a lot, and had a lots fun making the game. We did faced a couple problems with the timer, block the curosr and implementing the algorithm. However, we were able to overcome this challenges working together and seperately. 
+
+Reference:
+    serialport.cpp and serialport.h files come from eclass
+    

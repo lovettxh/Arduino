@@ -1,0 +1,116 @@
+Name: Hao Xuan, Jicheng Zhao
+CCID: hxuan, jicheng
+Student ID# 1537913, 1503763
+CMPUT 275 Assignment#2: Driving Route Finder Part2:Client  
+
+Included Files: 
+    server/
+        *server.cpp
+        *heap.h
+        *dijkstra.cpp
+        *dijkstra.h
+        *digraph.cpp
+        *digraph.h
+        *edmonton-roads-2.0.1.txt
+        *serialport.cpp
+        *serialport.h
+        *server_util.cpp
+        *server_util.h
+        *wdigraph.h
+        *Makefile
+
+    client/
+        *client.cpp
+        *consts_and_types.h
+        *lcd_image.cpp
+        *lcd_image.h
+        *map_drawing.cpp
+        *map_drawing.h
+        *Makefile
+    
+    *README
+
+
+Accessories:
+*USB Cable
+*Arduino Mega Board (AMG)
+*Adafruit_ILI9341 Breakout(the touchscreen display + SD)
+
+
+Running Instructions:
+1. Connect the Arduino to the PC using an A-B style USB cable. Ensure
+that the Arduino is using the proper serial port (/dev/ttyACM0 or -ACM1)
+.
+2.use the command "make upload" to upload the code to the Arduino.
+
+
+
+Wiring instruction:
+
+Board Pin <---> Arduino Pin
+===========================
+GND             GND
+Vin             5V
+3Vo             NOT CONNECTED
+CLK             52
+MISO            50
+MOSI            51
+CS              10
+D/C             9
+RST             NOT CONNECTED
+Lite            NOT CONNECTED
+Y+              A2 (analog pin)
+X+              4  (digital pin)
+Y-              5  (digital pin)
+X-              A3 (analog pin)
+IM0 - IM3       NOT CONNECTED (they expect a 3.3v signal, DON'T CONNECT!)
+CCS             6
+CD              NOT CONNECTED
+
+Display Pin     Arduino Mega Pin
+=============================
+1 GND           BB GND bus  
+2 Vin           BB Vcc (+ive) bus
+4 CLK           Pin 52
+5 MISO          Pin 50
+6 MOSI          Pin 51
+7 CS            Pin 10
+8 D/C           Pin 9
+19 CCS          Pin 6
+
+
+Zoom in and out buttons: 
+============================
+Button          Arduino Mega Pin
+Zoom In         Pin 2
+Zoom Out        Pin 3
+
+Joystick connections: 
+============================
+Joystick Pin    Arduino Mega Pin
++5v             Vcc
+GND             GND
+VRx             Analog 1
+VRy             Analog 0
+SW              Pin 8
+REFERENT TO circuit-wiring.txt.
+
+
+
+Description:
+
+In this assignment, we are implementing 2 parts. First, implement the part that communicates with the server to store the waypoints,the server is expected to uphold all Part 1 functionality,The server accepts and processes requests, and outputs waypoints in ​exactly​ the specified format using ​Serial communication with the Arduino​.The client correctly requests, waits for and retrieves all waypoints from the server. Serial communication is correctly implemented for bothparties and is free of glitches and errors.The client code is augmented to send a request to the server when the joystick button is pressed to select both start and end locations.The “no path” result is returned if (a) there is no path from the start to end locations or (b) there are over 500 waypoints returned. Second,the route is correctly drawn on the map and is consistent with the waypoints sent from the server. While the route is displayed, the user cancontinue to scroll and zoom on the map and the route adjusts accordingly.Cursor erase part of the route. Overall, there is a time-out and error handling rountine, The program does not end after processing only one request, such that, instead, the server waits for the next request from the client, and the client allowsthe user to select new start and end points. Both the client and the server correctly and exactly implement timeouts when waiting for replies. The timeout is 1 second in all cases exceptwhen the Arduino waits for the number of waypoints to be received from the server, when it is 10 seconds instead.When a timeout expires, the server and client reset their states to restart communication. Both the client and the server similarly reset theirstates upon receiving a message which does not make sense in their current state
+
+
+Notes:
+    
+    server.cpp:
+        It now read the input and send the output through Serial package instead of std::cin and std::cout,
+        it can also count for time out and continues to run after one process is done.
+
+    client.cpp:
+        bool communicate(lon_lat_32 start, lon_lat_32 end, shared_vars &shared):
+            This function communicate with c++ program. Send and receive data and store every waypoints.
+            It returns true or false indicating the communication is success or not.
+
+            
